@@ -1,0 +1,50 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #242424;
+  color: #fc6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+:root {
+  --yellow: #fc6;
+  --yellow-opacity: #514732;
+  --color-gray: #242424;
+}
+
+main {
+  margin: 120px 0 70px 0;
+}
+
+
+
+button {
+  padding: 0;
+  border: none;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+}

@@ -1,0 +1,93 @@
+.list {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr;
+  align-items: center;
+  gap: 20px;
+  outline: 1px solid var(--yellow);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.img {
+  object-fit: contain;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.title {
+  font-size: 20px;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 18px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  gap: 5px;
+  max-width: 130px;
+  width: 100%;
+  color: var(--yellow);
+  outline: 1px solid;
+  margin-left: auto;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 17px;
+  transition: 0.3s all;
+
+  &:hover {
+    background-color: var(--yellow);
+    color: var(--color-gray);
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+.finalPrice {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 40px;
+}
+
+.btnPay {
+  margin: 40px 0 0 0;
+}
+
+.dollars {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.userBalance {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.btnsAddCurrency {
+  display: flex;
+  gap: 10px;
+  margin-top: 40px;
+}
+
+.btnExchange {
+  max-width: 190px;
+}

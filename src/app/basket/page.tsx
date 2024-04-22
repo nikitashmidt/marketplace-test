@@ -1,6 +1,7 @@
-import Goods from "@/components/Products"
-import { type IDataCarts } from "@/types/global.types"
 import axios from "axios"
+
+import Basket from "@/components/Basket"
+import { type IDataCarts } from "@/types/global.types"
 
 async function getData() {
   try {
@@ -16,14 +17,10 @@ async function getData() {
   }
 }
 
-async function Home() {
+async function Page() {
   const { carts } = (await getData()) as IDataCarts
 
-  return (
-    <main>
-      <Goods products={carts.map(({ products }) => products).flat()} />
-    </main>
-  )
+  return <Basket products={carts.map(({ products }) => products).flat()} />
 }
 
-export default Home
+export default Page
