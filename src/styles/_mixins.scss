@@ -1,0 +1,49 @@
+@mixin xl {
+  @media (max-width: 1440px) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (max-width: 1280px) {
+    @content;
+  }
+}
+
+@mixin lg-md {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (max-width: 992px) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin xs {
+  @media (max-width: 540px) {
+    @content;
+  }
+}
+
+@mixin xs-mini {
+  @media (max-width: 500px) {
+    @content;
+  }
+}
+
+@mixin calcFn($selector, $startPx, $endPx, $start-width, $end-width) {
+  #{$selector}: calc(
+    #{$endPx}px +
+      ((100vw - #{$end-width}px) / (#{$start-width} - #{$end-width})) *
+      (#{$startPx} - #{$endPx})
+  );
+}

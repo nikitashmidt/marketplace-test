@@ -1,12 +1,32 @@
+@import "../../styles/mixins.scss";
+
 .titlePage {
   text-align: center;
+
+  @include xs {
+    @include calcFn(font-size, 24, 18, 540, 320);
+  }
 }
 
 .list {
   margin-top: 20px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 50px;
+  gap: 40px;
+
+  @include lg {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include sm {
+    grid-template-columns: repeat(2, 1fr);
+    @include calcFn(gap, 40, 20, 768, 540);
+  }
+
+  @include xs-mini {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 25px;
+  }
 }
 
 .imageBlock {
@@ -20,6 +40,26 @@
     .image {
       transform: scale(1.2);
     }
+  }
+
+  @include lg {
+    @include calcFn(width, 382, 299, 1280, 1024);
+    @include calcFn(height, 382, 299, 1280, 1024);
+  }
+
+  @include lg-md {
+    @include calcFn(width, 298, 213, 1024, 768);
+    @include calcFn(height, 298, 213, 1024, 768);
+  }
+
+  @include sm {
+    @include calcFn(width, 349, 225, 768, 500);
+    @include calcFn(height, 349, 225, 768, 500);
+  }
+
+  @include xs-mini {
+    @include calcFn(width, 470, 290, 500, 320);
+    @include calcFn(height, 470, 290, 500, 320);
   }
 }
 
@@ -37,6 +77,11 @@
   gap: 20px;
   text-align: center;
   height: 180px;
+
+  @include md {
+    gap: 10px;
+    height: 150px;
+  }
 }
 
 .title {
@@ -52,6 +97,10 @@
   box-orient: vertical;
   max-height: 50px;
   font-size: 20px;
+
+  @include md {
+    font-size: 17px;
+  }
 }
 
 .price {
@@ -59,26 +108,16 @@
   align-items: center;
   gap: 5px;
   font-size: 18px;
+
+  @include md {
+    font-size: 15px;
+  }
 }
 
 .btn {
   width: 100%;
-  height: 50px;
-  font-size: 17px;
-  outline: 1px solid var(--yellow);
-  border-radius: 10px;
   margin-top: auto;
-  color: var(--yellow);
-  transition: 0.3s all;
-
-  &:hover {
-    background-color: var(--yellow);
-    color: var(--color-gray);
-  }
-
-  &:active {
-    transform: scale(0.9);
-  }
+  height: 50px;
 }
 
 .btnLink {

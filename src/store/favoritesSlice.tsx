@@ -21,14 +21,17 @@ const useFavoritesSlice = create<IFavoritesState>()(
               favoritesId: newFavoritesId
             }
           }
-
           return {
             favoritesId: [...state.favoritesId, id]
           }
         })
       },
       clearFavoritesId() {
-        localStorage.removeItem("id")
+        set((state) => {
+          return {
+            favoritesId: []
+          }
+        })
       }
     }),
     {

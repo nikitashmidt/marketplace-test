@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.totalPrice, .error {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.select {
+  position: relative;
+  background-color: var(--color-gray);
+  color: var(--yellow);
+  border-radius: 8px;
+  padding: 0 10px;
+  font-size: 18px;
+  appearance: none;
+  height: 40px;
+}
+

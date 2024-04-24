@@ -12,12 +12,15 @@ function BasketBtn({ id }: IBasketBtnProps) {
   return (
     <>
       {favoritesId.includes(id) ? (
-        <Link href="/basket" className={cn(s.btn, s.btnLink)}>
-          Оформить заказ
+        <Link href="/basket" className={cn(s.btn, "btn", s.btnLink)}>
+          To orders
         </Link>
       ) : (
-        <button className={s.btn} onClick={() => updateFavoritesId(id)}>
-          Добавить в корзину
+        <button
+          className={cn("btn", s.btn)}
+          onClick={() => updateFavoritesId(id)}
+        >
+          Add to Basket
         </button>
       )}
     </>

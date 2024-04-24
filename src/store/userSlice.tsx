@@ -4,26 +4,43 @@ import { persist } from "zustand/middleware"
 interface IUsersState {
   coins: number
   dollars: number
-  updateCoins: (coins: number) => void
-  updateDollars: (dollars: number) => void
+  exchangeCoins: (coins: number) => void
+  addDollars: (dollars: number) => void
+  paymentСoins: (totalPrice: number) => void
+  paymentDollars: (totalPrice: number) => void
 }
 
 const useUserSlice = create<IUsersState>()(
   persist(
     (set) => ({
-      coins: 33,
-      dollars: 333,
-      updateCoins: (coins: number) => {
+      coins: 0,
+      dollars: 0,
+      exchangeCoins: (coins: number) => {
         set((state) => {
           return {
-            coins: state.coins + coins
+            coins: state.coins + coins,
+            dollars: state.dollars - coins
           }
         })
       },
-      updateDollars: (dollars: number) => {
+      addDollars: (dollars: number) => {
         set((state) => {
           return {
             dollars: state.dollars + dollars
+          }
+        })
+      },
+      paymentСoins: (totalPrice: number) => {
+        set((state) => {
+          return {
+            coins: state.coins - totalPrice
+          }
+        })
+      },
+      paymentDollars: (totalPrice: number) => {
+        set((state) => {
+          return {
+            dollars: state.dollars - totalPrice
           }
         })
       }

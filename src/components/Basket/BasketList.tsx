@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import { useState } from "react"
 import { TbCoinTaka } from "react-icons/tb"
 import { PiContactlessPaymentDuotone } from "react-icons/pi"
 import { MdDeleteForever } from "react-icons/md"
@@ -8,12 +9,14 @@ import cn from "classnames"
 
 import useFavoritesSlice from "@/store/favoritesSlice"
 import { type IBasketListProps } from "./Basket.interface"
+import { type IProduct } from "@/types/global.types"
+import PayModal from "@/components/Modals/PayModal"
 
 import s from "./Basket.module.scss"
-import { IProduct } from "@/types/global.types"
 
 function BasketList({ products }: IBasketListProps) {
   const { favoritesId, updateFavoritesId } = useFavoritesSlice()
+  const [isOpenModal, setIsOpenModal] = useState(false)
 
   function removeDuplicateObjects(arr: IProduct[]) {
     const uniqueObjects = [] as IProduct[]
@@ -53,14 +56,17 @@ function BasketList({ products }: IBasketListProps) {
                 className={s.img}
                 src={thumbnail}
                 alt={title}
-                width={50}
-                height={50}
+                width={120}
+                height={120}
               />
               <div className={s.title}> {title} </div>
               <div className={s.price}>
                 {price} <TbCoinTaka />
               </div>
-              <button className={s.btn} onClick={() => updateFavoritesId(id)}>
+              <button
+                className={cn("btn", s.btnDelete)}
+                onClick={() => updateFavoritesId(id)}
+              >
                 Delete <MdDeleteForever />
               </button>
             </li>
@@ -74,10 +80,18 @@ function BasketList({ products }: IBasketListProps) {
         </div>
       )}
       {favoritesList.length >= 1 && (
-        <button className={cn(s.btn, s.btnPay)}>
+        <button
+          className={cn("btn", s.btnPay)}
+          onClick={() => setIsOpenModal(true)}
+        >
           Pay <PiContactlessPaymentDuotone />
         </button>
       )}
+      <PayModal
+        finalPrice={finalPrice()}
+        isOpen={isOpenModal}
+        onRequestClose={() => setIsOpenModal(false)}
+      />
     </div>
   )
 }
