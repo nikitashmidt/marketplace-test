@@ -8,17 +8,23 @@ import { MdDeleteForever } from "react-icons/md"
 import cn from "classnames"
 
 import useFavoritesSlice from "@/store/favoritesSlice"
-import { type IBasketListProps } from "./Basket.interface"
 import { type IProduct } from "@/types/global.types"
 import PayModal from "@/components/Modals/PayModal"
+import Loader from "@/components/Loader"
+import useCartsQuery from "@/hooks/useQueryCarts"
 
 import s from "./Basket.module.scss"
 
-function BasketList({ products }: IBasketListProps) {
+function BasketList() {
   const { favoritesId, updateFavoritesId } = useFavoritesSlice()
+  const { data, isLoading } = useCartsQuery()
   const [isOpenModal, setIsOpenModal] = useState(false)
 
+  const products = data?.carts.map(({ products }) => products).flat()
+
   function removeDuplicateObjects(arr: IProduct[]) {
+    if (!arr) return
+
     const uniqueObjects = [] as IProduct[]
     const uniqueIds = new Set()
 
@@ -33,14 +39,16 @@ function BasketList({ products }: IBasketListProps) {
   }
 
   const favoritesList = removeDuplicateObjects(
-    products.filter(({ id }) => favoritesId.includes(id))
+    products?.filter(({ id }) => favoritesId.includes(id)) as IProduct[]
   )
 
   const finalPrice = () => {
     let sum = 0
 
-    for (let i = 0; i < favoritesId.length; i++) {
-      sum = sum + favoritesList[i].price
+    if (favoritesList) {
+      for (let i = 0; i < favoritesList.length; i++) {
+        sum = sum + favoritesList[i].price
+      }
     }
 
     return sum
@@ -49,7 +57,7 @@ function BasketList({ products }: IBasketListProps) {
   return (
     <div>
       <ul className={s.list}>
-        {favoritesList.map(({ title, id, price, thumbnail }) => {
+        {favoritesList?.map(({ title, id, price, thumbnail }) => {
           return (
             <li key={id} className={s.item}>
               <Image
@@ -74,12 +82,12 @@ function BasketList({ products }: IBasketListProps) {
         })}
       </ul>
 
-      {favoritesList.length >= 1 && (
+      {favoritesList && favoritesList.length >= 1 && (
         <div className={s.finalPrice}>
           Total price - {finalPrice()} <TbCoinTaka />
         </div>
       )}
-      {favoritesList.length >= 1 && (
+      {favoritesList && favoritesList.length >= 1 && (
         <button
           className={cn("btn", s.btnPay)}
           onClick={() => setIsOpenModal(true)}
@@ -92,6 +100,7 @@ function BasketList({ products }: IBasketListProps) {
         isOpen={isOpenModal}
         onRequestClose={() => setIsOpenModal(false)}
       />
+      {isLoading && <Loader />}
     </div>
   )
 }
